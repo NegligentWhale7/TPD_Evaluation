@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerControls playerControls;
+    [SerializeField] PlayerAnimatorManager playerAnimator;
     public float moveSpeed = 5f;
     public Camera mainCamera;
     public Vector2 movementBounds; // Limit the movement area
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         RotateTowardsMouse();
+        
     }
 
     void MovePlayer()
@@ -35,7 +37,9 @@ public class PlayerController : MonoBehaviour
         newPosition.x = Mathf.Clamp(newPosition.x, -movementBounds.x, movementBounds.x);
         newPosition.z = Mathf.Clamp(newPosition.z, -movementBounds.y, movementBounds.y);
         transform.position = newPosition;
-    }
+
+        playerAnimator.HandleAnimation(moveInput);
+    }    
 
     void RotateTowardsMouse()
     {

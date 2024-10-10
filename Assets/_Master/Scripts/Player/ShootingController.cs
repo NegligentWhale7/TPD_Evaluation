@@ -3,13 +3,15 @@ using UnityEngine.InputSystem;
 
 public class ShootingController : MonoBehaviour
 {
-    public ObjectPooler bulletPool;  // Pool para balas
-    public ObjectPooler missilePool; // Pool para misiles
-    public Transform firePoint;
-    public float bulletSpeed = 20f;
-    public float missileSpeed = 15f;
-    public int maxMissiles = 2;
+    [SerializeField] ObjectPooler bulletPool;  
+    [SerializeField] ObjectPooler missilePool; 
+    [SerializeField] Transform firePoint;
+    [SerializeField] float bulletSpeed = 20f;
+    [SerializeField] float missileSpeed = 15f;
+    [SerializeField] int maxMissiles = 2;
+    [SerializeField] PlayerAnimatorManager animatorManager;
 
+    private bool isBullet = false;
     private int currentMissiles;
     private PlayerControls controls;
 
@@ -21,12 +23,12 @@ public class ShootingController : MonoBehaviour
     void OnEnable()
     {
         controls.Enable();
-        controls.PlayerMovement.Shoot.started += OnShoot;  // Subscribe to the Shoot action
+        controls.PlayerMovement.Shoot.started += OnShoot;  
     }
 
     void OnDisable()
     {
-        controls.PlayerMovement.Shoot.started -= OnShoot;  // Unsubscribe to avoid memory leaks
+        controls.PlayerMovement.Shoot.started -= OnShoot; 
         controls.Disable();
     }
 
@@ -40,17 +42,20 @@ public class ShootingController : MonoBehaviour
         if (context.control.name == "leftButton")
         {
             ShootBullet();
+            isBullet = true;
+            animatorManager.HandleShootAnimation(isBullet);
         }
         else if (context.control.name == "rightButton" && currentMissiles > 0)
         {
             ShootMissile();
             currentMissiles--;
+            isBullet = false;
+            animatorManager.HandleShootAnimation(isBullet);
         }
     }
 
     void ShootBullet()
     {
-        // Obtener una bala del pool
         GameObject bullet = bulletPool.GetPooledObject();
         if (bullet != null)
         {
@@ -66,7 +71,6 @@ public class ShootingController : MonoBehaviour
 
     void ShootMissile()
     {
-        // Obtener un misil del pool
         GameObject missile = missilePool.GetPooledObject();
         if (missile != null)
         {
@@ -80,7 +84,6 @@ public class ShootingController : MonoBehaviour
         }
     }
 
-    // Opción para recuperar misiles a través de la lógica del juego
     public void ReplenishMissiles(int amount)
     {
         currentMissiles = Mathf.Min(currentMissiles + amount, maxMissiles);
