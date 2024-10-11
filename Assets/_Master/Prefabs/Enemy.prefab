@@ -264,7 +264,8 @@ MonoBehaviour:
   agent: {fileID: 3636552742489306564}
   firePoint: {fileID: 1993781162205469944}
   bulletSpeed: 20
-  timeForShoot: 1.5
+  timeForShoot: 0.5
+  distanceToShoot: 4.5
 --- !u!114 &1702511658795655984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +294,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

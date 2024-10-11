@@ -1,14 +1,19 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public Image shieldBar;
-    public Image healthBar;
-    public float maxShield = 100f;
-    public float maxHealth = 100f;
-    public float shieldRegenRate = 5f;
-    public float shieldRegenDelay = 5f;
+    [Header("Health Settings")]
+    [SerializeField] private float maxShield = 100f;
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float shieldRegenRate = 5f;
+    [SerializeField] private float shieldRegenDelay = 5f;
+    [Header("UI References")]
+    [SerializeField] private UIBarItem healthBar;
+    [SerializeField] private UIBarItem shieldBar;
+    [Header("Player Events")]
+    [SerializeField] private UnityEvent playerDeathEvent;
 
     private float currentShield;
     private float currentHealth;
@@ -23,8 +28,10 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHUD()
     {
-        shieldBar.fillAmount = currentShield / maxShield;
-        healthBar.fillAmount = currentHealth / maxHealth;
+        //shieldBar.fillAmount = currentShield / maxShield;
+        shieldBar.DisplayBarValue(currentShield, maxShield);
+        //healthBar.fillAmount = currentHealth / maxHealth;
+        healthBar.DisplayBarValue(currentHealth, maxHealth);
     }
 
     public void TakeDamage(float damage)
@@ -76,7 +83,7 @@ public class PlayerHealth : MonoBehaviour
 
     void GameOver()
     {
-        // Implement game over logic
+        playerDeathEvent?.Invoke();
     }
 }
 

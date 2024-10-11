@@ -11,8 +11,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] float bulletSpeed;
     [SerializeField] float timeForShoot;
+    [SerializeField] float distanceToShoot = 1.5f;
     Transform player;
     float timeCounter = 0;
+    bool canShoot = false;
 
     private void Awake()
     {
@@ -20,13 +22,31 @@ public class Enemy : MonoBehaviour
         player = FindObjectOfType<PlayerController>().gameObject.transform;
     }
 
+    private void Update()
+    {
+        if(Vector3.Distance(transform.position, player.position) < distanceToShoot)
+        {
+            agent.isStopped = true;
+            canShoot = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+            canShoot = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (player == null) return;        
         agent.destination = player.position;
+    }
 
+    private void LateUpdate()
+    {
+        if (!canShoot) return;
         timeCounter += Time.deltaTime;
-        if (timeCounter > timeForShoot)
+        if (timeCounter >= timeForShoot)
         {
             ShootBullet();
             timeCounter = 0;
