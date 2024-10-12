@@ -12,14 +12,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] float bulletSpeed;
     [SerializeField] float timeForShoot;
     [SerializeField] float distanceToShoot = 1.5f;
+    [Header("UI")]
+    [SerializeField] UIBarItem healthBar;
+
     Transform player;
     float timeCounter = 0;
     bool canShoot = false;
+    float currentHealth = 0;
+    float maxHealth = 100;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         player = FindObjectOfType<PlayerController>().gameObject.transform;
+        currentHealth = maxHealth;
     }
 
     private void Update()
@@ -63,8 +69,27 @@ public class Enemy : MonoBehaviour
             bullet.SetActive(true);  // Activar la bala
 
             // Aplicar la velocidad de la bala
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.velocity = firePoint.forward * bulletSpeed;
+            //Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            //rb.velocity = firePoint.forward * bulletSpeed;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        healthBar.DisplayBarValue(currentHealth, maxHealth);
+        if (currentHealth <= 0)
+        {
+            EnemiesTracker.Instance.RemoveEnemy(gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(10);
         }
     }
 }

@@ -6,8 +6,8 @@ public class ShootingController : MonoBehaviour
     [SerializeField] ObjectPooler bulletPool;  
     [SerializeField] ObjectPooler missilePool; 
     [SerializeField] Transform firePoint;
-    [SerializeField] float bulletSpeed = 20f;
-    [SerializeField] float missileSpeed = 15f;
+    //[SerializeField] float bulletSpeed = 20f;
+    //[SerializeField] float missileSpeed = 15f;
     [SerializeField] int maxMissiles = 2;
     [SerializeField] PlayerAnimatorManager animatorManager;
 
@@ -63,9 +63,9 @@ public class ShootingController : MonoBehaviour
             bullet.transform.rotation = firePoint.rotation;
             bullet.SetActive(true);  // Activar la bala
 
-            // Aplicar la velocidad de la bala
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.velocity = firePoint.forward * bulletSpeed;
+            //// Aplicar la velocidad de la bala
+            //Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            //rb.velocity = firePoint.forward * bulletSpeed;
         }
     }
 
@@ -78,9 +78,9 @@ public class ShootingController : MonoBehaviour
             missile.transform.rotation = firePoint.rotation;
             missile.SetActive(true);  // Activar el misil
 
-            // Aplicar la velocidad del misil
-            Rigidbody rb = missile.GetComponent<Rigidbody>();
-            rb.velocity = firePoint.forward * missileSpeed;
+            //// Aplicar la velocidad del misil
+            //Rigidbody rb = missile.GetComponent<Rigidbody>();
+            //rb.velocity = firePoint.forward * missileSpeed;
         }
     }
 

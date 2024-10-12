@@ -605,10 +605,14 @@ GameObject:
   m_Component:
   - component: {fileID: 7463848617706041879}
   - component: {fileID: 8758916908867170336}
+  - component: {fileID: 3331462329256930504}
+  - component: {fileID: 7739651303318402716}
   - component: {fileID: 7574085032492366407}
   - component: {fileID: 2842849714137008952}
   - component: {fileID: 5896388417175970908}
   - component: {fileID: 9028808975944958939}
+  - component: {fileID: 7510965913703738455}
+  - component: {fileID: 809395945225568511}
   m_Layer: 0
   m_Name: HPCharacter
   m_TagString: Untagged
@@ -651,7 +655,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 262e29700eeaf964eaa8cebabc7a26d6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -659,6 +663,56 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &3331462329256930504
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689467803751601417}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!136 &7739651303318402716
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689467803751601417}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.0089588
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.0039458, z: 0}
 --- !u!114 &7574085032492366407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,9 +739,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 7574085032492366407}
-  moveSpeed: 10
+  moveSpeed: 7
   mainCamera: {fileID: 0}
-  movementBounds: {x: 27, y: 20}
+  movementBounds: {x: 100, y: 100}
   moveInput: {x: 0, y: 0}
 --- !u!114 &5896388417175970908
 MonoBehaviour:
@@ -720,12 +774,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecdceae8cd8034c46b7c9f2f42a5b4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldBar: {fileID: 0}
-  healthBar: {fileID: 0}
   maxShield: 100
   maxHealth: 100
   shieldRegenRate: 5
   shieldRegenDelay: 5
+  healthBar: {fileID: 7510965913703738455}
+  shieldBar: {fileID: 809395945225568511}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7510965913703738455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689467803751601417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbee327af92b53f408ebd3e8f4445673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValueText: {fileID: 0}
+  maxValueText: {fileID: 0}
+  uIBar: {fileID: 0}
+  _lerpSpeed: 1
+--- !u!114 &809395945225568511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689467803751601417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbee327af92b53f408ebd3e8f4445673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValueText: {fileID: 0}
+  maxValueText: {fileID: 0}
+  uIBar: {fileID: 0}
+  _lerpSpeed: 1
 --- !u!1 &2789711956222763825
 GameObject:
   m_ObjectHideFlags: 0

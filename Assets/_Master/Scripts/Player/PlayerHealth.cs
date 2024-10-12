@@ -28,9 +28,7 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHUD()
     {
-        //shieldBar.fillAmount = currentShield / maxShield;
         shieldBar.DisplayBarValue(currentShield, maxShield);
-        //healthBar.fillAmount = currentHealth / maxHealth;
         healthBar.DisplayBarValue(currentHealth, maxHealth);
     }
 
@@ -84,6 +82,14 @@ public class PlayerHealth : MonoBehaviour
     void GameOver()
     {
         playerDeathEvent?.Invoke();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(10);
+        }
     }
 }
 

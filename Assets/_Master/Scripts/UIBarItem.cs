@@ -14,8 +14,6 @@ public class UIBarItem : MonoBehaviour
     {
         currentValueText.text = currentValue.ToString() + "/";
         maxValueText.text = maxValue.ToString();
-
-        //uIBar.fillAmount = (float)currentValue / maxValue;
         StartCoroutine(LerpBar((float)currentValue / maxValue));
     }
 

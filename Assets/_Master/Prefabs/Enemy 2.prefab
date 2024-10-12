@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4020489482235991045, guid: 7f4db09623376764cbaaa68044f4f1d2, type: 3}
+      propertyPath: timeForShoot
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5941599617507421739, guid: 7f4db09623376764cbaaa68044f4f1d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
