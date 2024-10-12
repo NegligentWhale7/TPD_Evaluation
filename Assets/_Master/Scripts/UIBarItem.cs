@@ -12,8 +12,8 @@ public class UIBarItem : MonoBehaviour
 
     public void DisplayBarValue(float currentValue, float maxValue)
     {
-        currentValueText.text = currentValue.ToString() + "/";
-        maxValueText.text = maxValue.ToString();
+        currentValueText.text = currentValue.ToString("#") + "/";
+        maxValueText.text = maxValue.ToString("#");
         StartCoroutine(LerpBar((float)currentValue / maxValue));
     }
 

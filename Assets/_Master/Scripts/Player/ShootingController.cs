@@ -15,9 +15,13 @@ public class ShootingController : MonoBehaviour
     private int currentMissiles;
     private PlayerControls controls;
 
+    public int MaxMissiles { get => maxMissiles; set => maxMissiles = value; }
+    public int CurrentMissiles { get => currentMissiles; set => maxMissiles = value; }
+
     void Awake()
     {
         controls = new PlayerControls();
+        currentMissiles = maxMissiles;
     }
 
     void OnEnable()
@@ -32,13 +36,11 @@ public class ShootingController : MonoBehaviour
         controls.Disable();
     }
 
-    void Start()
-    {
-        currentMissiles = maxMissiles;
-    }
-
     void OnShoot(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
+           || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+
         if (context.control.name == "leftButton")
         {
             ShootBullet();
@@ -52,6 +54,20 @@ public class ShootingController : MonoBehaviour
             isBullet = false;
             animatorManager.HandleShootAnimation(isBullet);
         }
+    }
+
+    public void MaxAvailableMissiles(float cost)
+    {
+        if (GameManager.Instance.TotalMoney < cost) return;
+        GameManager.Instance.TotalMoney -= cost;
+        maxMissiles++;
+    }
+
+    public void RecoverMissiles(float cost)
+    {
+        if (GameManager.Instance.TotalMoney < cost) return;
+        GameManager.Instance.TotalMoney -= cost;
+        currentMissiles = maxMissiles;
     }
 
     void ShootBullet()

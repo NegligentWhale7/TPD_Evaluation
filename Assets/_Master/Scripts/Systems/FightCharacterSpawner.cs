@@ -23,8 +23,12 @@ public class FightCharacterSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
+           || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+
         if (!EnemiesTracker.Instance.AreEnemiesAlive())
         {
+            GameManager.Instance.InterWave();
             SetWaveOfEnemies();
             currentWave++;
         }

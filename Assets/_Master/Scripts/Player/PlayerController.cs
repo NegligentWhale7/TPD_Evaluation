@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
+           || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+
         MovePlayer();
         RotateTowardsMouse();
         

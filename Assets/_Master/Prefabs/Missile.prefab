@@ -125,5 +125,5 @@ MonoBehaviour:
   explosionForce: 8
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   explosionEffect: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}

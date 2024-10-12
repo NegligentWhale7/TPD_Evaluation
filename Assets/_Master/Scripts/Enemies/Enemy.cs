@@ -7,11 +7,13 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] ObjectPooler bulletPool;
+    [SerializeField] ObjectPooler coinPool;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform firePoint;
     [SerializeField] float bulletSpeed;
     [SerializeField] float timeForShoot;
     [SerializeField] float distanceToShoot = 1.5f;
+    [SerializeField] float coinRatio = 50;
     [Header("UI")]
     [SerializeField] UIBarItem healthBar;
 
@@ -30,7 +32,10 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(Vector3.Distance(transform.position, player.position) < distanceToShoot)
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
+           || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+
+        if (Vector3.Distance(transform.position, player.position) < distanceToShoot)
         {
             agent.isStopped = true;
             canShoot = true;
@@ -40,16 +45,24 @@ public class Enemy : MonoBehaviour
             agent.isStopped = false;
             canShoot = false;
         }
+
+        transform.LookAt(player);
     }
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
+           || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+
         if (player == null) return;        
         agent.destination = player.position;
     }
 
     private void LateUpdate()
     {
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
+           || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+
         if (!canShoot) return;
         timeCounter += Time.deltaTime;
         if (timeCounter >= timeForShoot)
@@ -80,12 +93,24 @@ public class Enemy : MonoBehaviour
         healthBar.DisplayBarValue(currentHealth, maxHealth);
         if (currentHealth <= 0)
         {
+            GameManager.Instance.AddScore(10);
+            InstantiateCoin();
             EnemiesTracker.Instance.RemoveEnemy(gameObject);
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void InstantiateCoin()
+    {
+        if (Random.Range(0, 100) < coinRatio)
+        {
+            var coin = coinPool.GetPooledObject();
+            coin.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            coin.SetActive(true);
+        }
+    }
+
+        private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
