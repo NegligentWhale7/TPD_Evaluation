@@ -118,6 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b151a8e7c36b4459fc9b010052f3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinValue: 50
+  coinValue: 500
   rotationSpeed: 100
   rotationAxis: {x: 0, y: 0, z: 1}

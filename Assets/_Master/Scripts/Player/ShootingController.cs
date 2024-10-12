@@ -10,6 +10,7 @@ public class ShootingController : MonoBehaviour
     //[SerializeField] float missileSpeed = 15f;
     [SerializeField] int maxMissiles = 2;
     [SerializeField] PlayerAnimatorManager animatorManager;
+    [SerializeField] UIManager uiManager;
 
     private bool isBullet = false;
     private int currentMissiles;
@@ -49,6 +50,7 @@ public class ShootingController : MonoBehaviour
         }
         else if (context.control.name == "rightButton" && currentMissiles > 0)
         {
+            uiManager.RemoveRocket();
             ShootMissile();
             currentMissiles--;
             isBullet = false;
@@ -77,11 +79,10 @@ public class ShootingController : MonoBehaviour
         {
             bullet.transform.position = firePoint.position;
             bullet.transform.rotation = firePoint.rotation;
-            bullet.SetActive(true);  // Activar la bala
-
-            //// Aplicar la velocidad de la bala
-            //Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            //rb.velocity = firePoint.forward * bulletSpeed;
+            bullet.SetActive(true);
+          
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.velocity = firePoint.forward * bullet.GetComponent<Bullet>().BulletSpeed;
         }
     }
 
@@ -92,11 +93,10 @@ public class ShootingController : MonoBehaviour
         {
             missile.transform.position = firePoint.position;
             missile.transform.rotation = firePoint.rotation;
-            missile.SetActive(true);  // Activar el misil
+            missile.SetActive(true); 
 
-            //// Aplicar la velocidad del misil
-            //Rigidbody rb = missile.GetComponent<Rigidbody>();
-            //rb.velocity = firePoint.forward * missileSpeed;
+            Rigidbody rb = missile.GetComponent<Rigidbody>();
+            rb.velocity = firePoint.forward * missile.GetComponent<Missile>().BulletSpeed;
         }
     }
 

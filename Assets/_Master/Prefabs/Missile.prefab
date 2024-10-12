@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8877567865355334835}
   - component: {fileID: 530403152306860756}
   - component: {fileID: 6229264335170873401}
+  - component: {fileID: 1193457719467523664}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Untagged
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907175fa60261a542b2bd1f8f9bba70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  missileSpeed: 15
   damage: 50
   lifeTime: 5
   explosionRadius: 2
@@ -127,3 +128,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   explosionEffect: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
+--- !u!54 &1193457719467523664
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5209878545326227092}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1

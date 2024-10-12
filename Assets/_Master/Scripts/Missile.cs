@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    [SerializeField] float speed = 15;
+    [SerializeField] float missileSpeed = 15;
     [SerializeField] float damage = 10;
     [SerializeField] float lifeTime = 5;
     [SerializeField] float explosionRadius = 1;
@@ -13,6 +13,8 @@ public class Missile : MonoBehaviour
     [SerializeField] GameObject explosionEffect;
 
     private Collider[] colliders = new Collider[10]; // Pre-allocate array for OverlapSphereNonAlloc
+
+    public float BulletSpeed { get => missileSpeed; }
 
     //private void OnEnable()  
     //{  
@@ -24,7 +26,7 @@ public class Missile : MonoBehaviour
         if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
             || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
 
-        transform.Translate(speed * Time.deltaTime * Vector3.forward);
+        transform.Translate(missileSpeed * Time.deltaTime * Vector3.forward);
     }
 
     private void DestroyMissile()

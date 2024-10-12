@@ -66,8 +66,8 @@ public class FightCharacterSpawner : MonoBehaviour
                 InstantiateWaveOfEnemies(waveThreeEnemies);
                 break;
             default:
-                minEnemies = 10;
-                maxEnemies = 15;
+                minEnemies += 3;
+                maxEnemies += 3;
                 enemiesToSpawn = Random.Range(minEnemies, maxEnemies);
                 InstantiateWaveOfEnemies(waveTwoEnemies);
                 InstantiateWaveOfEnemies(waveThreeEnemies);

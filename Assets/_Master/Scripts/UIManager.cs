@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas shopCanvas;
     [SerializeField] private TextMeshProUGUI totalScoreText;
     [SerializeField] private TextMeshProUGUI totalMoneyText;
+    [SerializeField] private TextMeshProUGUI shopMoneyText;
     [SerializeField] private TextMeshProUGUI waveReachedText;
 
     public static UIManager Instance { get; private set; }
@@ -63,6 +64,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void RemoveRocket()
+    {
+        Destroy(rocketPanel.transform.GetChild(0).gameObject);
+    }
+
     public void ShowGameOverPanel()
     {
         gameOverPanel.enabled = true;
@@ -98,10 +104,17 @@ public class UIManager : MonoBehaviour
     public void ShowShopCanvas()
     {
         shopCanvas.enabled = true;
+        shopMoneyText.text = $"$ {GameManager.Instance.TotalMoney}";
+    }
+
+    public void UpdateShopCanvas()
+    {
+        shopMoneyText.text = $"$ {GameManager.Instance.TotalMoney}";
     }
 
     public void HideShopCanvas()
     {
         shopCanvas.enabled = false;
+        shopMoneyText.text = $"$ {GameManager.Instance.TotalMoney}";
     }
 }

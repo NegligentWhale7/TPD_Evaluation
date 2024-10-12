@@ -79,11 +79,10 @@ public class Enemy : MonoBehaviour
         {
             bullet.transform.position = firePoint.position;
             bullet.transform.rotation = firePoint.rotation;
-            bullet.SetActive(true);  // Activar la bala
+            bullet.SetActive(true);  
 
-            // Aplicar la velocidad de la bala
-            //Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            //rb.velocity = firePoint.forward * bulletSpeed;
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.velocity = firePoint.forward * bulletSpeed;
         }
     }
 

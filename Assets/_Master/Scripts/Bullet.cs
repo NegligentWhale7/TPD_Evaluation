@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed = 20;
+    [SerializeField] float bulletSpeed = 20;
 
-    private void Update()
-    {
-        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
-           || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+    public float BulletSpeed { get => bulletSpeed;}
 
-        transform.Translate(speed * Time.deltaTime * Vector3.forward);
-    }
+    //private void Update()
+    //{
+    //    if (GameManager.Instance.CurrentGameState == GameManager.GameState.GameOver
+    //       || GameManager.Instance.CurrentGameState == GameManager.GameState.InterWave) return;
+
+    //    transform.Translate(bulletSpeed * Time.deltaTime * Vector3.forward);
+    //}
 
     void OnCollisionEnter(Collision collision)
     {
