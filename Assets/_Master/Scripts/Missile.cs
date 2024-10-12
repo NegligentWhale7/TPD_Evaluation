@@ -36,6 +36,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        AudioManager.Instance.PlaySoundFX(SoundType.Explosion);
         var _explosionFx = Instantiate(explosionEffect, transform.position, transform.rotation);
         Destroy(_explosionFx, 3);
         int numColliders = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, colliders, layerMask);

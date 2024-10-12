@@ -45,6 +45,7 @@ public class ShootingController : MonoBehaviour
         if (context.control.name == "leftButton")
         {
             ShootBullet();
+            AudioManager.Instance.PlaySoundFX(SoundType.ShootingBullet);
             isBullet = true;
             animatorManager.HandleShootAnimation(isBullet);
         }
@@ -52,6 +53,7 @@ public class ShootingController : MonoBehaviour
         {
             uiManager.RemoveRocket();
             ShootMissile();
+            AudioManager.Instance.PlaySoundFX(SoundType.ShootingRocket);
             currentMissiles--;
             isBullet = false;
             animatorManager.HandleShootAnimation(isBullet);

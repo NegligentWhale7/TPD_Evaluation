@@ -41,24 +41,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
     public void AddScore(float score)
     {
+        AudioManager.Instance.PlaySoundFX(SoundType.Score);
         totalScore += score;
     }
 
     public void AddMoney(float money)
     {
+        AudioManager.Instance.PlaySoundFX(SoundType.Coin);
         totalMoney += money;
     }
 
     public void GameOver()
     {
+        AudioManager.Instance.PlaySoundFX(SoundType.GameOver);
         CurrentGameState = GameState.GameOver;
         UIManager.Instance.ShowGameOverPanel();
     }
 
     public void InterWave()
     {
+        AudioManager.Instance.PlaySoundFX(SoundType.Victory);
         CurrentGameState = GameState.InterWave;
         UIManager.Instance.ShowInterWavePanel();
     }

@@ -44,6 +44,11 @@ public class PlayerController : MonoBehaviour
         playerAnimator.HandleAnimation(moveInput);
     }    
 
+    public void IsMoving()
+    {
+        AudioManager.Instance.PlayFootSteps();
+    }
+
     void RotateTowardsMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());

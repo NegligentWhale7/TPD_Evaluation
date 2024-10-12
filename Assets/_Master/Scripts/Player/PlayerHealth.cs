@@ -55,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentShield > 0)
         {
+            AudioManager.Instance.PlaySoundFX(SoundType.ShieldDamaged);
             currentShield -= damage;
             if (currentShield < 0)
             {
@@ -64,6 +65,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.PlaySoundFX(SoundType.Hurt);
             currentHealth -= damage;
         }
 
